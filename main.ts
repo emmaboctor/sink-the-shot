@@ -6,7 +6,7 @@ enum ActionKind {
 namespace SpriteKind {
     export const Basketball = SpriteKind.create()
 }
-let tile_list2: tiles.Tile[] = []
+let list: tiles.Tile[] = []
 scene.onHitTile(SpriteKind.Basketball, 11, function (sprite) {
     info.changeLifeBy(-1)
     scene.placeOnRandomTile(ball, 9)
@@ -24,7 +24,9 @@ scene.onHitTile(SpriteKind.Basketball, 10, function (sprite) {
     }
 })
 function create_bounce_animation () {
-    anim_bounce = 0
+    if (ball.isHittingTile(CollisionDirection.Bottom)) {
+        ball.vy += 300
+    }
 }
 function create_rolling_animation () {
     anim_roll = animation.createAnimation(ActionKind.Walking, 200)
@@ -178,16 +180,16 @@ function clear_level () {
 }
 function create_coins () {
     tile_list = scene.getTilesByType(5)
-    for (let value of tile_list2) {
+    for (let value of list) {
         coin = sprites.create(img`
-            . . . b b b . . . 
-            . . b 5 5 5 b . . 
-            . b 5 d 3 d 5 b . 
-            . b 5 3 5 1 5 b . 
-            . c 5 3 5 1 d c . 
-            . c 5 d 1 d d c . 
-            . . f d d d f . . 
-            . . . f f f . . . 
+            . . . b b b . . 
+            . . b 5 5 5 b . 
+            . b 5 d 3 d 5 b 
+            . b 5 3 5 1 5 b 
+            . c 5 3 5 1 d c 
+            . c 5 d 1 d d c 
+            . . f d d d f . 
+            . . . f f f . . 
             `, SpriteKind.Food)
         scene.place(value, coin)
         animation.runMovementAnimation(
@@ -259,8 +261,8 @@ function create_ball () {
         `, SpriteKind.Basketball)
     controller.moveSprite(ball, 50, 0)
     ball.ay = 290
-    scene.placeOnRandomTile(ball, 9)
     scene.cameraFollowSprite(ball)
+    scene.placeOnRandomTile(ball, 9)
     create_bounce_animation()
     create_rolling_animation()
 }
@@ -271,6 +273,24 @@ function create_map () {
         d 1 d d d d d d d 1 d d d d d d 
         d 1 d d d d d d d 1 d d d d d d 
         1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+        d d d d d d d d d d d d d d d d 
+        d d d d d d d d d d d d d d d d 
+        d d d d d d d d d d d d d d d d 
+        d d d d d d d d d d d d d d d d 
+        d d d d d d d d d d d d d d d d 
+        d d d d d d d d d d d d d d d d 
+        d d d d d d d d d d d d d d d d 
+        d d d d d d d d d d d d d d d d 
+        d d d d d d d d d d d d d d d d 
+        d d d d d d d d d d d d d d d d 
+        d d d d d d d d d d d d d d d d 
+        d d d d d d d d d d d d d d d d 
+        `, true)
+    scene.setTile(14, img`
+        d d d d d d d d d d d d d d d d 
+        d d d d d d d d d d d d d d d d 
+        d d d d d d d d d d d d d d d d 
+        d d d d d d d d d d d d d d d d 
         d d d d d d d d d d d d d d d d 
         d d d d d d d d d d d d d d d d 
         d d d d d d d d d d d d d d d d 
@@ -339,22 +359,14 @@ function create_map () {
         . . . . . . . . . . . . . . . . 
         `, false)
     scene.setTile(5, img`
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . 
+        . . . . . . . . . 
+        . . . . . . . . . 
+        . . . . . . . . . 
+        . . . . . . . . . 
+        . . . . . . . . . 
+        . . . . . . . . . 
+        . . . . . . . . . 
         `, false)
     if (level == 1) {
         scene.setTileMap(img`
@@ -362,9 +374,9 @@ function create_map () {
             . . . . . . . . . . . . . . . . . . . . . . d d d d . . . . . a 
             . . . . . . . 5 . . . . . . 5 . . . . . . . . . . . . . . . . a 
             . . . . . . . . . . . . . . . . . . d d d d . . . . . . . . . a 
-            . . . . b . . . d d d d . . . . . d d . . . . . 5 . . . . . . a 
-            . . . d d d d . . . . d d . . . d d . . . . . . d d d d d . . a 
-            . . . . . . . . . 5 . . d d 5 d d . . b . b . b . . . . . . . a 
+            . . . . b . . . d d d d . . . . . d e . . . . . 5 . . . . . . a 
+            . . . d d d d . . . . e d . . . d e . . . . . . d d d d d . . a 
+            . . . . . . . . . 5 . . e d 5 d e . . b . b . b . . . . . . . a 
             d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d 
             `)
     } else if (level == 2) {
@@ -394,7 +406,6 @@ function create_map () {
 let coin: Sprite = null
 let tile_list: tiles.Tile[] = []
 let anim_roll: animation.Animation = null
-let anim_bounce = 0
 let ball: Sprite = null
 let level = 0
 level = 1
