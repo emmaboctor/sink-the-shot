@@ -515,7 +515,7 @@ function create_map () {
             e . b b b b b . . b b e b b . . . . . . b . . . . . . . . b . a 
             e d d d d d d d d d d e d d d d d d d d d d d d d d d d d d d d 
             `)
-    } else if (level == 3) {
+    } else if (level == 4) {
         scene.setTileMap(img`
             9 . . . . . . . . . . . . . . . . 5 . . . . . d d d d d . . . a 
             . . . . 5 . . 5 . . . . . . . . . d . . . . d . . . . . d . . a 
@@ -528,13 +528,13 @@ function create_map () {
             `)
     } else {
         scene.setTileMap(img`
-            9 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . a 
-            . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . a 
-            . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . a 
-            . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . a 
-            . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . a 
-            . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . a 
-            . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . a 
+            9 . . 5 . . . . . 5 . . 5 . . 5 . . 5 . . 5 . . . . . 5 . 5 . a 
+            . . . . d . . . d d d d d d d d d d d d d d d d d d d d d d . a 
+            d d d d e d d d e . . . e . . e . e . . . e . . . . e . . . . a 
+            . . . . e . . . e d . . e . . e . e d . . e . . . . e d d d . a 
+            . . . . e . . . e . . . e . . e . e . . . e . . . . . . . e . a 
+            . . . . e d d . e d d . . d d . . e d d . e d d . . d d d e . a 
+            b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b a 
             d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d 
             `)
     }
