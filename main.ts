@@ -6,19 +6,21 @@ enum ActionKind {
 namespace SpriteKind {
     export const Basketball = SpriteKind.create()
 }
-let list: tiles.Tile[] = []
 scene.onHitTile(SpriteKind.Basketball, 11, function (sprite) {
     info.changeLifeBy(-1)
     scene.placeOnRandomTile(ball, 9)
-    music.wawawawaa.play()
+    music.jumpDown.play()
 })
 scene.onHitTile(SpriteKind.Basketball, 10, function (sprite) {
     if (level == 3) {
+        music.powerUp.play()
         game.over(true)
     } else if (level == 2) {
+        music.powerUp.play()
         level += 1
         setup_level()
     } else {
+        music.powerUp.play()
         level += 1
         setup_level()
     }
@@ -180,7 +182,7 @@ function clear_level () {
 }
 function create_coins () {
     tile_list = scene.getTilesByType(5)
-    for (let value of list) {
+    for (let value of tile_list) {
         coin = sprites.create(img`
             . . . b b b . . 
             . . b 5 5 5 b . 
@@ -226,38 +228,21 @@ function setup_level () {
 }
 function create_ball () {
     ball = sprites.create(img`
-        ................................
-        ................................
-        ................................
-        ................................
-        ................................
-        ................................
-        ................................
-        ............444f444.............
-        ..........44444f44444...........
-        .........4f4444f4444f4..........
-        .........44f444f444f44..........
-        ........4444f44f44f4444.........
-        ........4444f44f44f4444.........
-        ........4444f44f44f4444.........
-        ........fffffffffffffff.........
-        ........4444f44f44f4444.........
-        ........4444f44f44f4444.........
-        ........4444f44f44f4444.........
-        .........44f444f444f44..........
-        .........4f4444f4444f4..........
-        ..........44444f44444...........
-        ............444f444.............
-        ................................
-        ................................
-        ................................
-        ................................
-        ................................
-        ................................
-        ................................
-        ................................
-        ................................
-        ................................
+        . . . . 4 4 4 f 4 4 4 . . . . 
+        . . 4 4 4 4 4 f 4 4 4 4 4 . . 
+        . 4 f 4 4 4 4 f 4 4 4 4 f 4 . 
+        . 4 4 f 4 4 4 f 4 4 4 f 4 4 . 
+        4 4 4 4 f 4 4 f 4 4 f 4 4 4 4 
+        4 4 4 4 f 4 4 f 4 4 f 4 4 4 4 
+        4 4 4 4 f 4 4 f 4 4 f 4 4 4 4 
+        f f f f f f f f f f f f f f f 
+        4 4 4 4 f 4 4 f 4 4 f 4 4 4 4 
+        4 4 4 4 f 4 4 f 4 4 f 4 4 4 4 
+        4 4 4 4 f 4 4 f 4 4 f 4 4 4 4 
+        . 4 4 f 4 4 4 f 4 4 4 f 4 4 . 
+        . 4 f 4 4 4 4 f 4 4 4 4 f 4 . 
+        . . 4 4 4 4 4 f 4 4 4 4 4 . . 
+        . . . . 4 4 4 f 4 4 4 . . . . 
         `, SpriteKind.Basketball)
     controller.moveSprite(ball, 50, 0)
     ball.ay = 290
@@ -305,22 +290,22 @@ function create_map () {
         d d d d d d d d d d d d d d d d 
         `, true)
     scene.setTile(11, img`
-        . . . . . . . c . . . . . . . . 
-        . . . . . . c c c . . . . . . . 
-        . . . . . . c b c . . . . . . . 
-        . . . . . c c b c c . . . . . . 
-        . . . . . c b b b c . . . . . . 
-        . . . . . c b b b c . . . . . . 
-        . . . . c c b b d c c . . . . . 
-        . . . . c b b b d b c . . . . . 
-        . . . . c b b b b b c . . . . . 
-        . . . . c b b b d b c . . . . . 
-        . . . c c b b b b b c c . . . . 
-        . . . c b b b b b b b c . . . . 
-        . . . c b d b b b b b c . . . . 
-        . . . c b d d b b b b c . . . . 
-        . . . c b b b b b b b c . . . . 
-        . . . c c c c c c c c c . . . . 
+        . . . . c . . . . 
+        . . . c c c . . . 
+        . . . c b c . . . 
+        . . c c b c c . . 
+        . . c b b b c . . 
+        . . c b b b c . . 
+        . c c b b d c c . 
+        . c b b b d b c . 
+        . c b b b b b c . 
+        . c b b b d b c . 
+        c c b b b b b c c 
+        c b b b b b b b c 
+        c b d b b b b b c 
+        c b d d b b b b c 
+        c b b b b b b b c 
+        c c c c c c c c c 
         `, true)
     scene.setTile(10, img`
         . . . 1 1 1 1 1 1 1 1 1 1 1 . . 
@@ -358,6 +343,40 @@ function create_map () {
         . . . . . . . . . . . . . . . . 
         . . . . . . . . . . . . . . . . 
         `, false)
+    if (level == 1) {
+        scene.setTileMap(img`
+            9 . . . . . . . . . . . . . . . . . . . . . . . 5 . . . . . . a 
+            . . . . . . . . . . . . . . . . . . . . . . d d d d . . . . . a 
+            . . . . . . . 5 . . . . . . 5 . . . . . . . . . . . . . . . . a 
+            . . . . . . . . . . . . . . . . . . d d d d . . . . . . . . . a 
+            . . . . b b . . . d d d . . . . . d e . . . . . 5 . . . . . . a 
+            . . . d d d d . . . . e d . . . d e . . . . . . d d d d d . . a 
+            . . . . . . . . . 5 . . e d 5 d e . . b b b b b . . . . . b b a 
+            d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d 
+            `)
+    } else if (level == 2) {
+        scene.setTileMap(img`
+            9 . . . . . . . . . . . . . . . . . . . . . . . . . 5 5 . . . a 
+            . . . . . . . 5 . . . . . . . . . . . . . . . . . d d d d . . a 
+            . . . . . . . . . . . . . . . . b b . . . 5 . . . . . . . . . a 
+            . . . . . . . . . . . . . . . . d d . . . . . d . . . . . . . a 
+            . . . d d d d . d . d . 5 . d . e e . . . d . . . . . . . b . a 
+            . . d e . . . . . . . . d . . . . . . d . . . . . d d d d d . a 
+            5 d e . b b b . . . b . . . b . . . . . b . b . . . . b . . . a 
+            d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d 
+            `)
+    } else {
+        scene.setTileMap(img`
+            9 . . . . . . . . . . . . . . . . 5 . . . . . d d d d d . . . a 
+            . . . . . . . . . . . . . . . . . d . . . . d . . . . . d . . a 
+            d d . . . 5 5 . . . d d d . . d . . . d . . e . . . . . e . . a 
+            e e d . . . . . . d e e e . . . . d . . . . e . . 5 . . . . . a 
+            . . e d . . . . d e . . . . . d . . . d . . e . . . . . . . . a 
+            . . . e d . . d e . . . . . . . . d . . . . . . . . . . d . d a 
+            b b b b b b b b b b b b b . b . b . b . . . . d d d d d . b . a 
+            d d d d d d d d d d d d d d d d d d d d d d d e e e e e d d d d 
+            `)
+    }
     scene.setTile(5, img`
         . . . . . . . . . 
         . . . . . . . . . 
@@ -368,40 +387,6 @@ function create_map () {
         . . . . . . . . . 
         . . . . . . . . . 
         `, false)
-    if (level == 1) {
-        scene.setTileMap(img`
-            9 . . . . . . . . . . . . . . . . . . . . . . . 5 . . . . . . a 
-            . . . . . . . . . . . . . . . . . . . . . . d d d d . . . . . a 
-            . . . . . . . 5 . . . . . . 5 . . . . . . . . . . . . . . . . a 
-            . . . . . . . . . . . . . . . . . . d d d d . . . . . . . . . a 
-            . . . . b . . . d d d d . . . . . d e . . . . . 5 . . . . . . a 
-            . . . d d d d . . . . e d . . . d e . . . . . . d d d d d . . a 
-            . . . . . . . . . 5 . . e d 5 d e . . b . b . b . . . . . . . a 
-            d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d 
-            `)
-    } else if (level == 2) {
-        scene.setTileMap(img`
-            9 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . a 
-            . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . a 
-            . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . a 
-            . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . a 
-            . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . a 
-            . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . a 
-            . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . a 
-            d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d 
-            `)
-    } else {
-        scene.setTileMap(img`
-            9 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . a 
-            . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . a 
-            . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . a 
-            . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . a 
-            . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . a 
-            . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . a 
-            . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . a 
-            d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d 
-            `)
-    }
 }
 let coin: Sprite = null
 let tile_list: tiles.Tile[] = []
