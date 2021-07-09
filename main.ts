@@ -12,9 +12,13 @@ scene.onHitTile(SpriteKind.Basketball, 11, function (sprite) {
     music.jumpDown.play()
 })
 scene.onHitTile(SpriteKind.Basketball, 10, function (sprite) {
-    if (level == 4) {
+    if (level == 5) {
         music.jumpUp.play()
         game.over(true)
+    } else if (level == 4) {
+        music.powerUp.play()
+        level += 1
+        setup_level()
     } else if (level == 3) {
         music.powerUp.play()
         level += 1
@@ -31,10 +35,7 @@ scene.onHitTile(SpriteKind.Basketball, 10, function (sprite) {
 })
 function create_bounce_animation () {
     if (ball.isHittingTile(CollisionDirection.Bottom)) {
-        ball.vy += -80
-        if (controller.A.isPressed()) {
-            ball.vy += -100
-        }
+        ball.vy += -200
     }
 }
 function create_rolling_animation () {
@@ -509,12 +510,12 @@ function create_map () {
             . . . d d d d . . 5 . . . . . . . . . . . d d d d d d . . . . a 
             5 . d e . . . d . . . 5 . . . . . . . . . . . 5 . 5 . . . . . a 
             . d e . . . . e . . . . . . . . . . 5 . . . d d d d d d . . . a 
-            d e . . . . . e d d d b d d d d . . . . . . . . 5 . 5 . . . . a 
-            e . . . . . . . . . e d e . . e d d d d . d d d d d d . . . . a 
-            e . b b b b b . . b b b b b . . . . . . b . . . . . . . . b . a 
-            e d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d 
+            d e . . . . . e d d d . d d d d . . . . . . . . 5 . 5 . . . . a 
+            e . . . . . . . . . e b e . . e d d d d . d d d d d d . . . . a 
+            e . b b b b b . . b b e b b . . . . . . b . . . . . . . . b . a 
+            e d d d d d d d d d d e d d d d d d d d d d d d d d d d d d d d 
             `)
-    } else {
+    } else if (level == 3) {
         scene.setTileMap(img`
             9 . . . . . . . . . . . . . . . . 5 . . . . . d d d d d . . . a 
             . . . . 5 . . 5 . . . . . . . . . d . . . . d . . . . . d . . a 
@@ -522,8 +523,19 @@ function create_map () {
             e e d . . . . . . d e e e . . . . d . . . . e . . 5 . . . . . a 
             . . e d . . . . d e . . . . . d . . . d . . e . . . . . . . . a 
             . . . e d . . d e . . . . . . . . d . . . . . . . . . . d . d a 
-            b b b b b b b b b b b b b b b . b . b . . . . d d d d d . b . a 
+            b b b b b b b b b b b b b b b . . . . . . . . d d d d d . b . a 
             d d d d d d d d d d d d d d d d d d d d d d d e e e e e d d d d 
+            `)
+    } else {
+        scene.setTileMap(img`
+            9 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . a 
+            . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . a 
+            . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . a 
+            . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . a 
+            . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . a 
+            . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . a 
+            . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . a 
+            d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d 
             `)
     }
 }
