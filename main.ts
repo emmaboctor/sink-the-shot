@@ -1140,7 +1140,7 @@ function create_map () {
         scene.setTileMap(img`
             9 . . . . 5 . . . . . . . . . . . . . . . . . . 5 . 5 . . . . a 
             . . . d d d d . . 5 . . . . . . . . . . . d d d d d d . . . . a 
-            . . d e . . . d . . . 5 . . . . . . . . . . . 5 . 5 . . . . . a 
+            . . d e . . e d . . . 5 . . . . . . . . . . . 5 . 5 . . . . . a 
             . d e . . . . e . . . . . . . . . . 5 . . . d d d d d d . . . a 
             d e . . . . . e d d d . d d d d . . . . . . . . 5 . 5 . . . . a 
             e . . . . . . . . . e b e . . e d d d d . d d d d d d . . . . a 
@@ -1408,8 +1408,8 @@ function create_map () {
             . . . d d d d . 5 . . . . . . . . . . . . . . . 5 . d d d d d a 
             . . . e 5 . e . . 5 . . . . . . . . . . 5 . . 5 . . e . 5 . e a 
             . . d e . . e . . . . . . . . d d . d d . d d . . d e 5 . . e a 
-            . d e . 5 . e . . . d d d d d 5 . . e . 5 . e e e e . . 5 . e a 
-            . e . . . . . d b . e . . 5 . . . . e . . . . . . . . 5 . . e a 
+            . d e . 5 . e . . . d d d d d e . . e . 5 . e e e e . . 5 . e a 
+            . e . . . . . d b . e . . 5 . . 5 . e . . . . . . . . 5 . . e a 
             5 . . . . b b e d d e b b . e e e e e b . . 5 . . 5 . . . b e a 
             d d d d d d d e e e e d d d e e e e e d d d d d d d d d d d e d 
             `)
