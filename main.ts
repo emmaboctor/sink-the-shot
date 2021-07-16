@@ -1274,7 +1274,7 @@ function create_map () {
             9 . . . . . . . . . . . . . . . . . . . . . . d d d d d . . . a 
             . . . . 5 . . 5 . . . . . . . d . d . d . . d . . . . . d . . a 
             d d . . . . . . . . d d d . . . . . . . . . e . . . . . e . . a 
-            . . d . . . . . . d . . . . . d . 5 . d . . e . . 2 . . . . . a 
+            . e d . . . . . . d e . . . . d . 5 . d . . e . . 2 . . . . . a 
             . . e d . . . . d e . . . . . . . d . . . . e . . . . . . . . a 
             . . . e d . . d e . . . . . . d d e d d . . . . . . . . d . d a 
             . . . . b b b b . . . . . . . b b b b b . . . d d d d d . b . a 
@@ -1424,10 +1424,10 @@ let power_up: Sprite = null
 let ball: Sprite = null
 let level = 0
 scene.setBackgroundColor(13)
-game.splash("Sink the Shot!", "(Press Space Bar)")
-game.splash("Move using <- and ->", "(Press Space Bar)")
-game.splash("Don't touch the spikes...", "(Press Space Bar)")
-game.splash("and don't miss the rainbow!", "(Press Space Bar)")
+game.splash("Let's Play Sink the Shot!", "(Press Space Bar)")
+game.splash("Move using <- and ->")
+game.splash("Don't touch the spikes...")
+game.splash("and don't miss the rainbow!")
 level = 1
 setup_level()
 create_ball()
